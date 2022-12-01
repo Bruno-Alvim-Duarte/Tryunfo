@@ -46,7 +46,6 @@ class Card extends React.Component {
           {' '}
           <span>{cardRare}</span>
         </p>
-        {/* <p hidden="true" data-testid="trunfo-card">Super Trunfo</p> */}
         {cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p>}
       </>
 
