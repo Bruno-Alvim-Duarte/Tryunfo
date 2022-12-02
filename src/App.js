@@ -8,17 +8,20 @@ class App extends React.Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.validations = this.validations.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.cleanState = this.cleanState.bind(this);
     this.state = {
       cardName: '',
       cardDescription: '',
       cardImage: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardRare: 'normal',
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
+      cards: [],
     };
   }
 
@@ -54,7 +57,34 @@ class App extends React.Component {
 
   onSaveButtonClick = (e) => {
     e.preventDefault();
-    console.log('clickou no botão salvar');
+    const { cards, cardName, cardDescription, cardImage, cardRare,
+      cardAttr1, cardAttr2, cardAttr3, cardTrunfo } = this.state;
+    this.setState({ cards: [...cards, {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardRare,
+      cardTrunfo,
+    }] }, this.cleanState);
+  };
+
+  cleanState = () => {
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      hasTrunfo: false,
+      isSaveButtonDisabled: true,
+      cards: [],
+    });
   };
 
   render() {
