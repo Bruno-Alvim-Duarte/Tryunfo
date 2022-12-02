@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './components/Card';
+import Cardslist from './components/CardsList';
 import Form from './components/Form';
 
 class App extends React.Component {
@@ -85,11 +86,11 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
-      cards: [],
     });
   };
 
   render() {
+    const { cards } = this.state;
     return (
       <div>
         <h1>My Tryunfo</h1>
@@ -101,6 +102,10 @@ class App extends React.Component {
         <Card
           { ...this.state }
           onInputChange={ this.onInputChange }
+        />
+
+        <Cardslist
+          cards={ cards }
         />
       </div>
     );
