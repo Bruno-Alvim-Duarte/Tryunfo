@@ -79,14 +79,15 @@ class Form extends React.Component {
           <option value="raro"> raro </option>
           <option value="muito raro"> muito raro </option>
         </select>
-        <input
+
+        { !hasTrunfo ? <input
           type="checkbox"
           data-testid="trunfo-input"
           name="cardTrunfo"
           id="trunfo"
           checked={ cardTrunfo }
           onChange={ onInputChange }
-        />
+        /> : <p>Você já tem um Super Trunfo em seu baralho</p>}
 
         <button
           type="submit"

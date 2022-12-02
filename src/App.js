@@ -50,15 +50,17 @@ class App extends React.Component {
 
   onInputChange = (e) => {
     this.setState(() => {
-      const value = (e.target.type === 'checkbox') ? e.target.checked : e.target.value;
-      return { [e.target.name]: value };
+      if (e.target.type === 'checkbox') {
+        return { [e.target.name]: e.target.checked, hasTrunfo: true };
+      }
+      return { [e.target.name]: e.target.value };
     }, this.validations);
   };
 
   onSaveButtonClick = (e) => {
     e.preventDefault();
     const { cards, cardName, cardDescription, cardImage, cardRare,
-      cardAttr1, cardAttr2, cardAttr3, cardTrunfo } = this.state;
+      cardAttr1, cardAttr2, cardAttr3, cardTrunfo, hasTrunfo } = this.state;
     this.setState({ cards: [...cards, {
       cardName,
       cardDescription,
@@ -68,6 +70,7 @@ class App extends React.Component {
       cardAttr3,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
     }] }, this.cleanState);
   };
 
@@ -81,7 +84,6 @@ class App extends React.Component {
       cardAttr3: '0',
       cardRare: 'normal',
       cardTrunfo: false,
-      hasTrunfo: false,
       isSaveButtonDisabled: true,
       cards: [],
     });
