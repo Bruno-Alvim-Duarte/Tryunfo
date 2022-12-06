@@ -25,6 +25,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       cards: [],
       nameFilter: '',
+      rareFilter: 'todas',
     };
   }
 

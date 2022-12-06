@@ -4,8 +4,13 @@ import Card from './Card';
 
 class CardsList extends React.Component {
   render() {
-    const { cards, onDeleteButtonClick, onInputChange, nameFilter } = this.props;
-    const filteredList = cards.filter((card) => card.cardName.includes(nameFilter));
+    const { cards, onDeleteButtonClick, onInputChange, nameFilter,
+      rareFilter } = this.props;
+    let filteredList = cards.filter((card) => card.cardName.includes(nameFilter));
+    if (rareFilter !== 'todas') {
+      filteredList = cards.filter((card) => card.cardName.includes(nameFilter)
+      && card.cardRare === rareFilter);
+    }
     return (
       <>
         <input
@@ -15,6 +20,21 @@ class CardsList extends React.Component {
           onChange={ onInputChange }
           value={ nameFilter }
         />
+        <label htmlFor="rareFilter">
+          Filtro por raridade:
+          <select
+            name="rareFilter"
+            id="rareFilter"
+            onChange={ onInputChange }
+            value={ rareFilter }
+            data-testid="rare-filter"
+          >
+            <option value="todas">todas</option>
+            <option value="normal">normal</option>
+            <option value="raro">raro</option>
+            <option value="muito raro">muito raro</option>
+          </select>
+        </label>
         <ul>
           {filteredList.map((card) => (
             <li key={ card.cardName }>
@@ -43,6 +63,7 @@ CardsList.propTypes = {
   onDeleteButtonClick: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
   nameFilter: PropTypes.string.isRequired,
+  rareFilter: PropTypes.string.isRequired,
 };
 
 export default CardsList;
