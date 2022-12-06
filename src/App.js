@@ -24,6 +24,7 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       cards: [],
+      nameFilter: '',
     };
   }
 
@@ -118,8 +119,10 @@ class App extends React.Component {
         />
 
         <Cardslist
+          { ...this.state }
           cards={ cards }
           onDeleteButtonClick={ this.onDeleteButtonClick }
+          onInputChange={ this.onInputChange }
         />
       </div>
     );

@@ -4,26 +4,36 @@ import Card from './Card';
 
 class CardsList extends React.Component {
   render() {
-    const { cards, onDeleteButtonClick } = this.props;
+    const { cards, onDeleteButtonClick, onInputChange, nameFilter } = this.props;
+    const filteredList = cards.filter((card) => card.cardName.includes(nameFilter));
     return (
-      <ul>
-        {cards.map((card) => (
-          <li key={ card.cardName }>
-            <Card
-              { ...card }
-            />
-            <button
-              data-testid="delete-button"
-              type="button"
-              onClick={ onDeleteButtonClick }
-              id={ card.id }
-            >
-              Excluir
+      <>
+        <input
+          type="text"
+          data-testid="name-filter"
+          name="nameFilter"
+          onChange={ onInputChange }
+          value={ nameFilter }
+        />
+        <ul>
+          {filteredList.map((card) => (
+            <li key={ card.cardName }>
+              <Card
+                { ...card }
+              />
+              <button
+                data-testid="delete-button"
+                type="button"
+                onClick={ onDeleteButtonClick }
+                id={ card.id }
+              >
+                Excluir
 
-            </button>
-          </li>
-        ))}
-      </ul>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </>
     );
   }
 }
@@ -31,6 +41,8 @@ class CardsList extends React.Component {
 CardsList.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   onDeleteButtonClick: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  nameFilter: PropTypes.string.isRequired,
 };
 
 export default CardsList;
