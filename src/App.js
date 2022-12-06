@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './components/Card';
 import Cardslist from './components/CardsList';
 import Form from './components/Form';
+import generateRandomKey from './helpers/generateRandomKey';
 
 class App extends React.Component {
   constructor() {
@@ -72,7 +73,19 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       hasTrunfo,
+      id: generateRandomKey(),
     }] }, this.cleanState);
+  };
+
+  onDeleteButtonClick = (e) => {
+    this.setState(() => {
+      const { cards } = this.state;
+      const deletedCard = cards.find((card) => card.id
+    === e.target.id);
+      console.log(deletedCard);
+      const newCards = cards.filter((card) => card !== deletedCard);
+      return { cards: newCards, hasTrunfo: !deletedCard.hasTrunfo };
+    });
   };
 
   cleanState = () => {
@@ -106,6 +119,7 @@ class App extends React.Component {
 
         <Cardslist
           cards={ cards }
+          onDeleteButtonClick={ this.onDeleteButtonClick }
         />
       </div>
     );

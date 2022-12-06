@@ -4,7 +4,7 @@ import Card from './Card';
 
 class CardsList extends React.Component {
   render() {
-    const { cards } = this.props;
+    const { cards, onDeleteButtonClick } = this.props;
     return (
       <ul>
         {cards.map((card) => (
@@ -12,6 +12,15 @@ class CardsList extends React.Component {
             <Card
               { ...card }
             />
+            <button
+              data-testid="delete-button"
+              type="button"
+              onClick={ onDeleteButtonClick }
+              id={ card.id }
+            >
+              Excluir
+
+            </button>
           </li>
         ))}
       </ul>
@@ -21,6 +30,7 @@ class CardsList extends React.Component {
 
 CardsList.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  onDeleteButtonClick: PropTypes.func.isRequired,
 };
 
 export default CardsList;
