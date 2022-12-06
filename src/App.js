@@ -26,6 +26,8 @@ class App extends React.Component {
       cards: [],
       nameFilter: '',
       rareFilter: 'todas',
+      trunfoFilter: false,
+      isOtherFiltersDisabled: false,
     };
   }
 
@@ -54,8 +56,10 @@ class App extends React.Component {
 
   onInputChange = (e) => {
     this.setState(() => {
-      if (e.target.type === 'checkbox') {
+      if (e.target.type === 'checkbox' && e.target.name === 'cardTrunfo') {
         return { [e.target.name]: e.target.checked, hasTrunfo: true };
+      } if (e.target.type === 'checkbox' && e.target.name === 'trunfoFilter') {
+        return { [e.target.name]: e.target.checked, isOtherFiltersDisabled: true };
       }
       return { [e.target.name]: e.target.value };
     }, this.validations);
