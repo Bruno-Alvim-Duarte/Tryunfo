@@ -3,6 +3,8 @@ import Card from './components/Card';
 import Cardslist from './components/CardsList';
 import Form from './components/Form';
 import generateRandomKey from './helpers/generateRandomKey';
+import logo from './img/logo_tryunfo.png';
+import './App.css';
 
 class App extends React.Component {
   constructor() {
@@ -55,11 +57,13 @@ class App extends React.Component {
   };
 
   onInputChange = (e) => {
+    const { isOtherFiltersDisabled } = this.state;
     this.setState(() => {
       if (e.target.type === 'checkbox' && e.target.name === 'cardTrunfo') {
-        return { [e.target.name]: e.target.checked, hasTrunfo: true };
+        return { [e.target.name]: e.target.checked };
       } if (e.target.type === 'checkbox' && e.target.name === 'trunfoFilter') {
-        return { [e.target.name]: e.target.checked, isOtherFiltersDisabled: true };
+        return { [e.target.name]: e.target.checked,
+          isOtherFiltersDisabled: !isOtherFiltersDisabled };
       }
       return { [e.target.name]: e.target.value };
     }, this.validations);
@@ -69,6 +73,9 @@ class App extends React.Component {
     e.preventDefault();
     const { cards, cardName, cardDescription, cardImage, cardRare,
       cardAttr1, cardAttr2, cardAttr3, cardTrunfo, hasTrunfo } = this.state;
+    if (cardTrunfo === true) {
+      this.setState({ hasTrunfo: true });
+    }
     this.setState({ cards: [...cards, {
       cardName,
       cardDescription,
@@ -90,7 +97,7 @@ class App extends React.Component {
     === e.target.id);
       console.log(deletedCard);
       const newCards = cards.filter((card) => card !== deletedCard);
-      return { cards: newCards, hasTrunfo: !deletedCard.hasTrunfo };
+      return { cards: newCards, hasTrunfo: !deletedCard.cardTrunfo };
     });
   };
 
@@ -112,17 +119,26 @@ class App extends React.Component {
     const { cards } = this.state;
     return (
       <div>
-        <h1>My Tryunfo</h1>
-        <Form
-          { ...this.state }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <Card
-          { ...this.state }
-          onInputChange={ this.onInputChange }
-        />
+        <img src={ logo } alt="logo tryunfo" />
+        <div className="display-register-card">
 
+          <Form
+            { ...this.state }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+          />
+
+          <div>
+            <h1 className="pre-visualizer-h1">PRÉ-VISUALIZAÇÃO</h1>
+            <div className="pre-visualizer-card">
+              <Card
+                { ...this.state }
+                onInputChange={ this.onInputChange }
+              />
+            </div>
+          </div>
+
+        </div>
         <Cardslist
           { ...this.state }
           cards={ cards }

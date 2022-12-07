@@ -23,6 +23,7 @@ class CardsList extends React.Component {
           onChange={ onInputChange }
           value={ nameFilter }
           disabled={ isOtherFiltersDisabled }
+          placeholder="Nome da carta"
         />
         <label htmlFor="rareFilter">
           Filtro por raridade:
@@ -33,6 +34,7 @@ class CardsList extends React.Component {
             value={ rareFilter }
             data-testid="rare-filter"
             disabled={ isOtherFiltersDisabled }
+            placeholder="Raridade"
           >
             <option value="todas">todas</option>
             <option value="normal">normal</option>
