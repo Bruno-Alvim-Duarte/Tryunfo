@@ -155,7 +155,7 @@ class App extends React.Component {
     const { cards } = this.state;
     return (
       <div className="app">
-        <img src={ logo } alt="logo tryunfo" />
+        <img src={ logo } alt="logo tryunfo" className="header--logo" />
         <div className="display-register-card">
 
           <Form

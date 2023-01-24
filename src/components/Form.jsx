@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SuperTrunfo from './SuperTrunfo';
+import ValidationIcon from './ValidationIcon';
 
 class Form extends React.Component {
   render() {
     const maxSumAttributes = 210;
+    const maxAttribute = 90;
     const {
       cardName,
       cardDescription,
@@ -30,31 +32,37 @@ class Form extends React.Component {
           className="register-card-label-type1 register-card-text"
         >
           Nome
-          <input
-            type="text"
-            data-testid="name-input"
-            name="cardName"
-            id="cardName"
-            value={ cardName }
-            onChange={ onInputChange }
-            className="register-card-input-type1"
-          />
+          <div>
+            <input
+              type="text"
+              data-testid="name-input"
+              name="cardName"
+              id="cardName"
+              value={ cardName }
+              onChange={ onInputChange }
+              className="register-card-input-type1"
+            />
+            <ValidationIcon validationStatus={ cardName.length > 0 } />
+          </div>
         </label>
         <label
           htmlFor="cardDescription"
           className="register-card-label-type1 register-card-text"
         >
           Descrição
-          <textarea
-            name="cardDescription"
-            id="cardDescription"
-            data-testid="description-input"
-            cols="30"
-            rows="10"
-            value={ cardDescription }
-            onChange={ onInputChange }
-            className="register-card-input-type1"
-          />
+          <div>
+            <textarea
+              name="cardDescription"
+              id="cardDescription"
+              data-testid="description-input"
+              cols="30"
+              rows="10"
+              value={ cardDescription }
+              onChange={ onInputChange }
+              className="register-card-input-type1"
+            />
+            <ValidationIcon validationStatus={ cardDescription.length > 0 } />
+          </div>
         </label>
         <label
           htmlFor="cardAttr1"
@@ -78,6 +86,10 @@ class Form extends React.Component {
             value={ cardAttr1 }
             onChange={ onInputChange }
             className="register-card-input-type2"
+          />
+          <ValidationIcon
+            validationStatus={ cardAttr1 >= 0
+            && cardAttr1 <= maxAttribute }
           />
         </label>
         <label
@@ -103,6 +115,10 @@ class Form extends React.Component {
             onChange={ onInputChange }
             className="register-card-input-type2"
           />
+          <ValidationIcon
+            validationStatus={ cardAttr2 >= 0
+            && cardAttr2 <= maxAttribute }
+          />
         </label>
         <label
           htmlFor="cardAttr3"
@@ -126,6 +142,10 @@ class Form extends React.Component {
             value={ cardAttr3 }
             onChange={ onInputChange }
             className="register-card-input-type2"
+          />
+          <ValidationIcon
+            validationStatus={ cardAttr3 >= 0
+            && cardAttr3 <= maxAttribute }
           />
         </label>
         <p>
@@ -153,6 +173,7 @@ class Form extends React.Component {
             onChange={ onInputChange }
             className="register-card-input-type2"
           />
+          <ValidationIcon validationStatus={ cardImage.length > 0 } />
         </label>
         <label
           htmlFor="cardRare"
@@ -166,7 +187,7 @@ class Form extends React.Component {
             value={ cardRare }
             onChange={ onInputChange }
             placeholder="normal"
-            className="register-card-input-type1"
+            className="register-card-input-type1 register-card-input-type2"
           >
             <option value="normal"> normal </option>
             <option value="raro"> raro </option>
