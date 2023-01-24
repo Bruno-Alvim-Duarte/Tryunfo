@@ -28,6 +28,13 @@ body {
   width: 70vw;
 }
 
+.pre-visualizer-h1 {
+  color: #2fc18c;
+  font-family: Epilogue , sans-serif;
+  font-style: italic;
+  font-weight: 800;
+}
+
 .register-card-h1 {
   color: #2fc18c;
   font-family: Epilogue , sans-serif;
