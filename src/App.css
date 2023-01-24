@@ -1,6 +1,10 @@
 body {
-  align-items: center;
   background-color: #052727;
+  box-sizing: border-box;
+}
+
+.app {
+  align-items: center;
   display: flex;
   flex-direction: column;
 }
@@ -15,6 +19,7 @@ body {
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 40px;
   padding: 5px 50px;
   width: 70vw;
 }
@@ -77,4 +82,88 @@ body {
 
 .image-card {
   max-width: 350px;
+}
+
+.filters-cards-list {
+  align-items: center;
+  background-color: #036b52;
+  border-radius: 6px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.filters-cards-lists-input {
+  background-color: #036b52;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  margin: 0 10px;
+  padding: 10px;
+  width: 300px;
+}
+
+.filters-cards-lists-input::placeholder {
+  color: rgb(255, 255, 255, 0.7);
+}
+
+.filters-cards-lists-input:disabled {
+  color: rgb(255, 255, 255, 0.3);
+}
+
+.filters-cards-lists-input:disabled::placeholder {
+  color: rgb(255, 255, 255, 0.3);
+}
+
+.cards-list-h1 {
+  color: white;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.super-trunfo {
+  background: url('./img/logo_tryunfo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 200px;
+  width: 200px;
+}
+
+.card--list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card--list--item {
+  align-items: center;
+  background-color: #036b52;
+  border: 10px solid white;
+  border-radius: 10px;
+  box-shadow: rgba(255, 255, 255, 0.45) 0 5px 15px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.save--button {
+  background-color: #2fc18c;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.save--button:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.remove--button {
+  background-color: red;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.1rem;
 }

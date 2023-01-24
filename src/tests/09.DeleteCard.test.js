@@ -3,6 +3,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import App from '../App';
 
+beforeEach( () => {
+  window.localStorage.clear();
+})
+
 describe("9 - Crie um botão para remover uma carta do baralho", () => {
   it("Será validado se o botão `Excluir` é renderizado na tela apenas nas cartas adicionadas ao baralho", () => {
     render(<App />);

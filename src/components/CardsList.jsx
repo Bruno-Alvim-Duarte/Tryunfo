@@ -15,18 +15,21 @@ class CardsList extends React.Component {
       filteredList = cards.filter((card) => card.cardTrunfo === true);
     }
     return (
-      <>
-        <input
-          type="text"
-          data-testid="name-filter"
-          name="nameFilter"
-          onChange={ onInputChange }
-          value={ nameFilter }
-          disabled={ isOtherFiltersDisabled }
-          placeholder="Nome da carta"
-        />
-        <label htmlFor="rareFilter">
-          Filtro por raridade:
+      <div>
+        <div className="filters-cards-list">
+          <label htmlFor="nameFilter">
+            Filtro de busca
+            <input
+              type="text"
+              data-testid="name-filter"
+              name="nameFilter"
+              onChange={ onInputChange }
+              value={ nameFilter }
+              disabled={ isOtherFiltersDisabled }
+              placeholder="Nome da carta"
+              className="filters-cards-lists-input"
+            />
+          </label>
           <select
             name="rareFilter"
             id="rareFilter"
@@ -35,28 +38,33 @@ class CardsList extends React.Component {
             data-testid="rare-filter"
             disabled={ isOtherFiltersDisabled }
             placeholder="Raridade"
+            className="filters-cards-lists-input"
           >
             <option value="todas">todas</option>
             <option value="normal">normal</option>
             <option value="raro">raro</option>
             <option value="muito raro">muito raro</option>
           </select>
-        </label>
-        <input
-          type="checkbox"
-          name="trunfoFilter"
-          id="trunfoFilter"
-          data-testid="trunfo-filter"
-          value={ trunfoFilter }
-          onChange={ onInputChange }
-        />
-        <ul>
+          <label htmlFor="trunfoFilter">
+            Trunfo
+            <input
+              type="checkbox"
+              name="trunfoFilter"
+              id="trunfoFilter"
+              data-testid="trunfo-filter"
+              value={ trunfoFilter }
+              onChange={ onInputChange }
+            />
+          </label>
+        </div>
+        <ul className="card--list">
           {filteredList.map((card) => (
-            <li key={ card.cardName }>
+            <li key={ card.id } className="card--list--item">
               <Card
                 { ...card }
               />
               <button
+                className="remove--button"
                 data-testid="delete-button"
                 type="button"
                 onClick={ onDeleteButtonClick }
@@ -68,7 +76,7 @@ class CardsList extends React.Component {
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
   }
 }

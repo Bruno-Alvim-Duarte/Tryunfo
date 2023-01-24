@@ -21,32 +21,38 @@ class App extends React.Component {
       cardAttr1: '0',
       cardAttr2: '0',
       cardAttr3: '0',
+      cardAttr1Name: 'Atributo 1',
+      cardAttr2Name: 'Atributo 2',
+      cardAttr3Name: 'Atributo 3',
       cardRare: 'normal',
       cardTrunfo: false,
       hasTrunfo: false,
-      isSaveButtonDisabled: true,
       cards: [],
       nameFilter: '',
       rareFilter: 'todas',
       trunfoFilter: false,
       isOtherFiltersDisabled: false,
+      isSaveButtonDisabled: true,
     };
   }
 
-  validations = () => {
-    const { cardName, cardDescription, cardImage, cardRare,
-      cardAttr1, cardAttr2, cardAttr3 } = this.state;
-    const validateNameDescImgRare = cardName.length > 0
-    && cardDescription.length > 0
-    && cardImage.length > 0
-    && cardRare.length > 0;
+  componentDidMount() {
+    const cardsStorage = JSON.parse(localStorage.getItem('cards'));
+    if (cardsStorage) {
+      this.setState({ cards: cardsStorage });
+    }
+  }
 
+  validateAtributesNumbers = (validateNameDescImgRare) => {
+    const { cardAttr1, cardAttr2, cardAttr3 } = this.state;
     const maxAttributes = 90;
     const maxSumAttributes = 210;
-    const validateAttribute = Number(cardAttr1) >= 0 && Number(cardAttr1) <= maxAttributes
+    const validateAttribute = Number(cardAttr1) >= 0
+    && Number(cardAttr1) <= maxAttributes
     && Number(cardAttr2) >= 0 && Number(cardAttr2) <= maxAttributes
     && Number(cardAttr3) >= 0 && Number(cardAttr3) <= maxAttributes
-    && Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) <= maxSumAttributes;
+    && Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3)
+    <= maxSumAttributes;
 
     if (validateAttribute && validateNameDescImgRare) {
       this.setState({ isSaveButtonDisabled: false });
@@ -54,6 +60,17 @@ class App extends React.Component {
     if (!validateAttribute || !validateNameDescImgRare) {
       this.setState({ isSaveButtonDisabled: true });
     }
+  };
+
+  validations = () => {
+    const { cardName, cardDescription, cardImage, cardRare,
+    } = this.state;
+    const validateNameDescImgRare = cardName.length > 0
+    && cardDescription.length > 0
+    && cardImage.length > 0
+    && cardRare.length > 0;
+
+    this.validateAtributesNumbers(validateNameDescImgRare);
   };
 
   onInputChange = (e) => {
@@ -72,22 +89,34 @@ class App extends React.Component {
   onSaveButtonClick = (e) => {
     e.preventDefault();
     const { cards, cardName, cardDescription, cardImage, cardRare,
-      cardAttr1, cardAttr2, cardAttr3, cardTrunfo, hasTrunfo } = this.state;
+      cardAttr1, cardAttr2, cardAttr3,
+      cardAttr1Name, cardAttr2Name, cardAttr3Name,
+      cardTrunfo, hasTrunfo } = this.state;
     if (cardTrunfo === true) {
       this.setState({ hasTrunfo: true });
     }
-    this.setState({ cards: [...cards, {
+    const newObject = {
       cardName,
       cardDescription,
       cardImage,
       cardAttr1,
       cardAttr2,
       cardAttr3,
+      cardAttr1Name,
+      cardAttr2Name,
+      cardAttr3Name,
       cardRare,
       cardTrunfo,
       hasTrunfo,
       id: generateRandomKey(),
-    }] }, this.cleanState);
+    };
+    this.setState({ cards: [...cards, newObject] }, this.cleanState);
+    if (localStorage.getItem('cards')) {
+      const cardsStorage = JSON.parse(localStorage.getItem('cards'));
+      localStorage.setItem('cards', JSON.stringify([...cardsStorage, newObject]));
+      return;
+    }
+    localStorage.setItem('cards', JSON.stringify([newObject]));
   };
 
   onDeleteButtonClick = (e) => {
@@ -99,6 +128,10 @@ class App extends React.Component {
       const newCards = cards.filter((card) => card !== deletedCard);
       return { cards: newCards, hasTrunfo: !deletedCard.cardTrunfo };
     });
+    const cardsStorage = JSON.parse(localStorage.getItem('cards'));
+    const cardsFiltered = cardsStorage.filter((cardStorage) => cardStorage.id
+      !== e.target.id);
+    localStorage.setItem('cards', JSON.stringify([...cardsFiltered]));
   };
 
   cleanState = () => {
@@ -109,6 +142,9 @@ class App extends React.Component {
       cardAttr1: '0',
       cardAttr2: '0',
       cardAttr3: '0',
+      cardAttr1Name: 'Atributo 1',
+      cardAttr2Name: 'Atributo 2',
+      cardAttr3Name: 'Atributo 3',
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
@@ -118,7 +154,7 @@ class App extends React.Component {
   render() {
     const { cards } = this.state;
     return (
-      <div>
+      <div className="app">
         <img src={ logo } alt="logo tryunfo" />
         <div className="display-register-card">
 
@@ -139,6 +175,8 @@ class App extends React.Component {
           </div>
 
         </div>
+
+        <h1 className="cards-list-h1">TODAS AS CARTAS</h1>
         <Cardslist
           { ...this.state }
           cards={ cards }
