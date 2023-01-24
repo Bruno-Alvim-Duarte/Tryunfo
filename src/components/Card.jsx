@@ -19,11 +19,7 @@ class Card extends React.Component {
     } = this.props;
     return (
       <div className="card">
-        <p data-testid="name-card">
-          Nome:
-          {' '}
-          <span>{cardName}</span>
-        </p>
+        <h2 data-testid="name-card">{cardName}</h2>
         <img
           src={ cardImage }
           alt={ cardName }
@@ -31,44 +27,27 @@ class Card extends React.Component {
           className="image-card"
         />
         <p data-testid="description-card">
-          Descrição:
-          {' '}
           <span>{cardDescription}</span>
         </p>
-        <p data-testid="attr1-card">
-          <span>
-            {cardAttr1Name}
-            {' '}
-            :
-          </span>
-          {' '}
-          <span>{cardAttr1}</span>
-        </p>
-        <p data-testid="attr2-card">
-          <span>
-            {cardAttr2Name}
-            {' '}
-            :
-          </span>
-          {' '}
-          <span>{cardAttr2}</span>
-        </p>
-        <p data-testid="attr3-card">
-          <span>
-            {cardAttr3Name}
-            {' '}
-            :
-          </span>
-          {' '}
-          <span>{cardAttr3}</span>
-        </p>
-        <p data-testid="rare-card">
-          Raridade:
-          {' '}
-          <span>{cardRare}</span>
-        </p>
-        {cardTrunfo
+        <ul>
+          <li data-testid="attr1-card">
+            <h3>{cardAttr1Name}</h3>
+            <span>{cardAttr1}</span>
+          </li>
+          <li data-testid="attr2-card">
+            <h3>{cardAttr2Name}</h3>
+            <span>{cardAttr2}</span>
+          </li>
+          <li data-testid="attr3-card">
+            <h3>{cardAttr3Name}</h3>
+            <span>{cardAttr3}</span>
+          </li>
+        </ul>
+        <div>
+          <span data-testid="rare-card" className="card--rare">{cardRare}</span>
+          {cardTrunfo
         && <SuperTrunfoImg />}
+        </div>
       </div>
 
     );
