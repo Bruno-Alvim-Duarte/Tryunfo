@@ -1,5 +1,10 @@
 # Boas-vindas ao repositório do projeto Tryunfo!
 
+## +++++++ VIDEO DE APRESENTAÇÃO 📹 ++++++++++
+(Brincadeiras a parte)
+
+https://user-images.githubusercontent.com/14060102/214413209-def80652-cdae-45e7-83a1-0d74a1c14ca6.mp4
+
 ## Descrição 📩
 Esse projeto feito por mim visa entregar uma plataforma de Trunfo 🃏🃏🃏 com funcionalidades como: criar um baralho de cartas, criar atributos para cada carta, filtrar as cartas por nome ou raridade, colocar imagens personalizadas em suas cartas entre outras que você pode checar no nosso vídeo de apresentação ou até mesmo no site em que hospedamos o projeto 😉: <a href="https://tryunfo-bruno-alvim-duarte.vercel.app/" target="_blank">Tryunfo</a>
 
@@ -41,10 +46,5 @@ Esse projeto feito por mim visa entregar uma plataforma de Trunfo 🃏🃏🃏 c
   
 </details>
 
-
-## +++++++ VIDEO DE APRESENTAÇÃO 📹 ++++++++++
-(Brincadeiras a parte)
-
-https://user-images.githubusercontent.com/14060102/214413209-def80652-cdae-45e7-83a1-0d74a1c14ca6.mp4
 
 
